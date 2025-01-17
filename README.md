@@ -60,8 +60,9 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 - ```ts
   class FNV0 {
     constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
-    freeze(): this;
     get freezed(): boolean;
+    get size(): FNVBitsSize;
+    freeze(): this;
     hash(): bigint;
     hashBase16(): string;
     hashBase32Hex(): string;
@@ -76,8 +77,9 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 - ```ts
   class FNV1 {
     constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
-    freeze(): this;
     get freezed(): boolean;
+    get size(): FNVBitsSize;
+    freeze(): this;
     hash(): bigint;
     hashBase16(): string;
     hashBase32Hex(): string;
@@ -92,8 +94,9 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 - ```ts
   class FNV1a {
     constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
-    freeze(): this;
     get freezed(): boolean;
+    get size(): FNVBitsSize;
+    freeze(): this;
     hash(): bigint;
     hashBase16(): string;
     hashBase32Hex(): string;

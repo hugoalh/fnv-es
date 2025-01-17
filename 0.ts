@@ -32,19 +32,26 @@ export class FNV0 {
 		}
 	}
 	/**
+	 * Whether the instance is freezed.
+	 * @returns {boolean}
+	 */
+	get freezed(): boolean {
+		return this.#freezed;
+	}
+	/**
+	 * Bits size of the hash.
+	 * @returns {FNVBitsSize}
+	 */
+	get size(): FNVBitsSize {
+		return this.#size;
+	}
+	/**
 	 * Freeze the instance to prevent any update.
 	 * @returns {this}
 	 */
 	freeze(): this {
 		this.#freezed = true;
 		return this;
-	}
-	/**
-	 * Whether the instance is freezed.
-	 * @returns {boolean}
-	 */
-	get freezed(): boolean {
-		return this.#freezed;
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in original format.
