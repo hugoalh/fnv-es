@@ -46,7 +46,7 @@ export class FNV0 {
 		return this.#size;
 	}
 	/**
-	 * Freeze the instance to prevent any update.
+	 * Freeze the instance to prevent any further update.
 	 * @returns {this}
 	 */
 	freeze(): this {
