@@ -127,7 +127,7 @@ export class FNV0 {
 		return this;
 	}
 	/**
-	 * Initialize from the readable stream, asynchronously.
+	 * Initialize from the readable stream.
 	 * @param {FNVBitsSize} size Bits size of the non-cryptographic hash.
 	 * @param {ReadableStream<FNVAcceptDataType>} stream Readable stream.
 	 * @returns {Promise<FNV0>}
