@@ -109,7 +109,7 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
   }
   ```
 - ```ts
-  type FNVAcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
+  type FNVAcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
   ```
 - ```ts
   type FNVBitsSize = 32 | 64 | 128 | 256 | 512 | 1024;

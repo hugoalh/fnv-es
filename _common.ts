@@ -36,4 +36,4 @@ export function resolveFNVParameter(size: FNVBitsSize): Readonly<FNVParameter> {
 	}
 	return fnvParameters[size];
 }
-export type FNVAcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
+export type FNVAcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
