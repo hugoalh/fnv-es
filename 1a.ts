@@ -1,7 +1,8 @@
 import {
 	resolveFNVParameter,
 	type FNVAcceptDataType,
-	type FNVBitsSize
+	type FNVBitsSize,
+	type FNVParameter
 } from "./_common.ts";
 export type {
 	FNVAcceptDataType,
@@ -9,7 +10,7 @@ export type {
 };
 export class FNV1a {
 	get [Symbol.toStringTag](): string {
-		return "FNV1a";
+		return `FNV1a-${this.#size}`;
 	}
 	#freezed: boolean = false;
 	#hash: bigint;
@@ -23,12 +24,11 @@ export class FNV1a {
 	constructor(size: FNVBitsSize, data?: FNVAcceptDataType) {
 		const {
 			offset,
-			prime,
-			size: sizeFmt
-		} = resolveFNVParameter(size);
+			prime
+		}: Readonly<FNVParameter> = resolveFNVParameter(size);
 		this.#hash = offset;
 		this.#prime = prime;
-		this.#size = sizeFmt;
+		this.#size = size;
 		if (typeof data !== "undefined") {
 			this.update(data);
 		}

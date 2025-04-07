@@ -3,9 +3,8 @@ const fnvBitsSizes: readonly FNVBitsSize[] = [32, 64, 128, 256, 512, 1024];
 export interface FNVParameter {
 	offset: bigint;
 	prime: bigint;
-	size: FNVBitsSize;
 }
-const fnvParameters: Readonly<Record<FNVBitsSize, Readonly<Omit<FNVParameter, "size">>>> = {
+const fnvParameters: Readonly<Record<FNVBitsSize, Readonly<FNVParameter>>> = {
 	32: {
 		offset: 2_166_136_261n,
 		prime: 16_777_619n
@@ -31,14 +30,10 @@ const fnvParameters: Readonly<Record<FNVBitsSize, Readonly<Omit<FNVParameter, "s
 		prime: 5_016_456_510_113_118_655_434_598_811_035_278_955_030_765_345_404_790_744_303_017_523_831_112_055_108_147_451_509_157_692_220_295_382_716_162_651_878_526_895_249_385_292_291_816_524_375_083_746_691_371_804_094_271_873_160_484_737_966_720_260_389_217_684_476_157_468_082_573n
 	}
 };
-export function resolveFNVParameter(size: bigint | number): FNVParameter {
-	const sizeFmt: number = (typeof size === "bigint") ? Number(size) : size;
-	if (!fnvBitsSizes.includes(sizeFmt as FNVBitsSize)) {
+export function resolveFNVParameter(size: FNVBitsSize): Readonly<FNVParameter> {
+	if (!fnvBitsSizes.includes(size)) {
 		throw new RangeError(`\`${size}\` is not a valid FNV hash bits size! Only accept these values: ${fnvBitsSizes.join(", ")}`);
 	}
-	return {
-		...fnvParameters[sizeFmt as FNVBitsSize],
-		size: sizeFmt as FNVBitsSize
-	};
+	return fnvParameters[size];
 }
 export type FNVAcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
