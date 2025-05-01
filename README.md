@@ -6,7 +6,7 @@
 [![JSR: @hugoalh/fnv](https://img.shields.io/jsr/v/@hugoalh/fnv?label=@hugoalh/fnv&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/fnv")](https://jsr.io/@hugoalh/fnv)
 [![NPM: @hugoalh/fnv](https://img.shields.io/npm/v/@hugoalh/fnv?label=@hugoalh/fnv&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/fnv")](https://www.npmjs.com/package/@hugoalh/fnv)
 
-An ES (JavaScript & TypeScript) module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
+An ECMAScript (JavaScript & TypeScript) module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
 
 Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256, 512, and 1024.
 
