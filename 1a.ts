@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import {
 	resolveFNVParameter,
 	type FNVAcceptDataType,
@@ -14,6 +15,11 @@ export class FNV1a {
 	}
 	#freezed: boolean = false;
 	#hash: bigint;
+	#hashBase16: string | null = null;
+	#hashBase32Hex: string | null = null;
+	#hashBase36: string | null = null;
+	#hashBase64: string | null = null;
+	#hashBase64URL: string | null = null;
 	#prime: bigint;
 	#size: FNVBitsSize;
 	/**
@@ -32,6 +38,16 @@ export class FNV1a {
 		if (typeof data !== "undefined") {
 			this.update(data);
 		}
+	}
+	#clearStorage(): void {
+		if (this.#freezed) {
+			throw new Error(`Instance is freezed!`);
+		}
+		this.#hashBase16 = null;
+		this.#hashBase32Hex = null;
+		this.#hashBase36 = null;
+		this.#hashBase64 = null;
+		this.#hashBase64URL = null;
 	}
 	/**
 	 * Whether the instance is freezed.
@@ -67,21 +83,40 @@ export class FNV1a {
 	 * @returns {string}
 	 */
 	hashBase16(): string {
-		return this.hashBigInt().toString(16).toUpperCase();
+		this.#hashBase16 ??= this.hashBigInt().toString(16).toUpperCase();
+		return this.#hashBase16;
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in Base32Hex ({@link https://datatracker.ietf.org/doc/html/rfc4648#section-7 RFC 4648 §7}).
 	 * @returns {string}
 	 */
 	hashBase32Hex(): string {
-		return this.hashBigInt().toString(32).toUpperCase();
+		this.#hashBase32Hex ??= this.hashBigInt().toString(32).toUpperCase();
+		return this.#hashBase32Hex;
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in Base36.
 	 * @returns {string}
 	 */
 	hashBase36(): string {
-		return this.hashBigInt().toString(36).toUpperCase();
+		this.#hashBase36 ??= this.hashBigInt().toString(36).toUpperCase();
+		return this.#hashBase36;
+	}
+	/**
+	 * Get the non-cryptographic hash of the data, in Base64.
+	 * @returns {string}
+	 */
+	hashBase64(): string {
+		this.#hashBase64 ??= Buffer.from(this.hashBase16(), "hex").toString("base64");
+		return this.#hashBase64;
+	}
+	/**
+	 * Get the non-cryptographic hash of the data, in Base64URL.
+	 * @returns {string}
+	 */
+	hashBase64URL(): string {
+		this.#hashBase64URL ??= Buffer.from(this.hashBase16(), "hex").toString("base64url");
+		return this.#hashBase64URL;
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in big integer.
@@ -115,12 +150,12 @@ export class FNV1a {
 	 * @returns {this}
 	 */
 	update(data: FNVAcceptDataType): this {
-		if (this.#freezed) {
-			throw new Error(`Instance is freezed!`);
-		}
+		this.#clearStorage();
 		for (const byte of (
-			(data instanceof Uint8Array) ? data
-				: ((typeof data === "string") ? new TextEncoder().encode(data)
+			(data instanceof Uint8Array)
+				? data
+				: ((typeof data === "string")
+					? new TextEncoder().encode(data)
 					: new Uint8Array(data)
 				)
 		)) {
