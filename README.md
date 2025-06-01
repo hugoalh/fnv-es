@@ -51,8 +51,7 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 
 ### 🛡️ Runtime Permissions
 
-- **File System - Read (Deno: `read`; NodeJS: `fs-read`):**
-  - *Resources* (Optional)
+*This module does not request any runtime permission.*
 
 ## 🧩 APIs
 
