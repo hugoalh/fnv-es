@@ -68,6 +68,7 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase64(): string;
     hashBase64URL(): string;
     hashBigInt(): bigint;
+    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
     update(data: FNVAcceptDataType): this;
@@ -87,6 +88,7 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase64(): string;
     hashBase64URL(): string;
     hashBigInt(): bigint;
+    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
     update(data: FNVAcceptDataType): this;
@@ -106,6 +108,7 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase64(): string;
     hashBase64URL(): string;
     hashBigInt(): bigint;
+    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
     update(data: FNVAcceptDataType): this;
