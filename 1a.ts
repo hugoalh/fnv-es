@@ -1,9 +1,9 @@
 import { Buffer } from "node:buffer";
 import {
-	resolveFNVParameter,
+	resolveFNVBitsParameter,
 	type FNVAcceptDataType,
-	type FNVBitsSize,
-	type FNVParameter
+	type FNVBitsParameter,
+	type FNVBitsSize
 } from "./_common.ts";
 export type {
 	FNVAcceptDataType,
@@ -31,7 +31,7 @@ export class FNV1a {
 		const {
 			offset,
 			prime
-		}: Readonly<FNVParameter> = resolveFNVParameter(size);
+		}: Readonly<FNVBitsParameter> = resolveFNVBitsParameter(size);
 		this.#hash = offset;
 		this.#prime = prime;
 		this.#size = size;
