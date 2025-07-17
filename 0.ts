@@ -124,6 +124,7 @@ export class FNV0 {
 	/**
 	 * Get the non-cryptographic hash of the data, in big integer.
 	 * @returns {bigint}
+	 * @deprecated Use method {@linkcode FNV0.hashBigInt} instead.
 	 */
 	hashBigInteger: () => bigint = this.hashBigInt;
 	/**
@@ -154,14 +155,12 @@ export class FNV0 {
 	 */
 	update(data: FNVAcceptDataType): this {
 		this.#clearStorage();
-		for (const byte of (
-			(data instanceof Uint8Array)
-				? data
-				: ((typeof data === "string")
-					? new TextEncoder().encode(data)
-					: new Uint8Array(data)
-				)
-		)) {
+		const dataFmt: Uint8Array = (data instanceof Uint8Array) ? data : (
+			(typeof data === "string")
+				? new TextEncoder().encode(data)
+				: new Uint8Array(data)
+		);
+		for (const byte of dataFmt) {
 			this.#hash = BigInt.asUintN(this.#size, (this.#hash * this.#prime) ^ BigInt(byte));
 		}
 		return this;
