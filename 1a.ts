@@ -1,4 +1,3 @@
-import { Buffer } from "node:buffer";
 import {
 	resolveFNVBitsParameter,
 	type FNVAcceptDataType,
@@ -18,14 +17,13 @@ export class FNV1a {
 	#hashBase16: string | null = null;
 	#hashBase32Hex: string | null = null;
 	#hashBase36: string | null = null;
-	#hashBase64: string | null = null;
-	#hashBase64URL: string | null = null;
+	#hashUint8Array: Uint8Array | null = null;
 	#prime: bigint;
 	#size: FNVBitsSize;
 	/**
 	 * Initialize.
 	 * @param {FNVBitsSize} size Bits size of the non-cryptographic hash.
-	 * @param {FNVAcceptDataType} [data] Data. Can append later via the method {@linkcode FNV1a.update}.
+	 * @param {FNVAcceptDataType} [data] Data. Can append later via the method {@linkcode FNV1a.update} and {@linkcode FNV1a.updateFromStream}.
 	 */
 	constructor(size: FNVBitsSize, data?: FNVAcceptDataType) {
 		const {
@@ -46,8 +44,7 @@ export class FNV1a {
 		this.#hashBase16 = null;
 		this.#hashBase32Hex = null;
 		this.#hashBase36 = null;
-		this.#hashBase64 = null;
-		this.#hashBase64URL = null;
+		this.#hashUint8Array = null;
 	}
 	/**
 	 * Whether the instance is freezed.
@@ -103,40 +100,11 @@ export class FNV1a {
 		return this.#hashBase36;
 	}
 	/**
-	 * Get the non-cryptographic hash of the data, in Base64.
-	 * @returns {string}
-	 */
-	hashBase64(): string {
-		this.#hashBase64 ??= this.hashBuffer().toString("base64");
-		return this.#hashBase64;
-	}
-	/**
-	 * Get the non-cryptographic hash of the data, in Base64URL.
-	 * @returns {string}
-	 */
-	hashBase64URL(): string {
-		this.#hashBase64URL ??= this.hashBuffer().toString("base64url");
-		return this.#hashBase64URL;
-	}
-	/**
 	 * Get the non-cryptographic hash of the data, in big integer.
 	 * @returns {bigint}
 	 */
 	hashBigInt(): bigint {
 		return this.hash();
-	}
-	/**
-	 * Get the non-cryptographic hash of the data, in big integer.
-	 * @returns {bigint}
-	 * @deprecated Use method {@linkcode FNV1a.hashBigInt} instead.
-	 */
-	hashBigInteger: () => bigint = this.hashBigInt;
-	/**
-	 * Get the non-cryptographic hash of the data, in Buffer.
-	 * @returns {Buffer}
-	 */
-	hashBuffer(): Buffer {
-		return Buffer.from(this.hashBase16(), "hex");
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in hex/hexadecimal without padding.
@@ -151,6 +119,24 @@ export class FNV1a {
 	 */
 	hashHexPadding(): string {
 		return this.hashHex().padStart(this.#size / 4, "0");
+	}
+	/**
+	 * Get the non-cryptographic hash of the data, in Uint8Array.
+	 * @returns {Uint8Array}
+	 */
+	hashUint8Array(): Uint8Array {
+		if (this.#hashUint8Array === null) {
+			const hex: string = this.hashHex();
+			const hexFmt: string = (hex.length % 2 === 0) ? hex : `0${hex}`;
+			const bytes: string[] = [];
+			for (let index: number = 0; index < hexFmt.length; index += 2) {
+				bytes.push(hexFmt.slice(index, index + 2));
+			}
+			this.#hashUint8Array = Uint8Array.from(bytes.map((byte: string): number => {
+				return Number.parseInt(byte, 16);
+			}));
+		}
+		return Uint8Array.from(this.#hashUint8Array);
 	}
 	/**
 	 * Append data.
@@ -170,17 +156,15 @@ export class FNV1a {
 		return this;
 	}
 	/**
-	 * Initialize from the readable stream.
-	 * @param {FNVBitsSize} size Bits size of the non-cryptographic hash.
+	 * Append data from the readable stream.
 	 * @param {ReadableStream<FNVAcceptDataType>} stream Readable stream.
-	 * @returns {Promise<FNV1a>}
+	 * @returns {Promise<this>}
 	 */
-	static async fromStream(size: FNVBitsSize, stream: ReadableStream<FNVAcceptDataType>): Promise<FNV1a> {
-		const instance: FNV1a = new this(size);
+	async updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this> {
 		for await (const chunk of stream) {
-			instance.update(chunk);
+			this.update(chunk);
 		}
-		return instance;
+		return this;
 	}
 }
 export default FNV1a;

@@ -104,46 +104,52 @@ Deno.test("Stream 1 32", {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(32, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(32).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });
 Deno.test("Stream 1 64", {
 	permissions: {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(64, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(64).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });
 Deno.test("Stream 1 128", {
 	permissions: {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(128, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(128).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });
 Deno.test("Stream 1 256", {
 	permissions: {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(256, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(256).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });
 Deno.test("Stream 1 512", {
 	permissions: {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(512, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(512).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });
 Deno.test("Stream 1 1024", {
 	permissions: {
 		read: true
 	}
 }, async () => {
-	using file = await Deno.open("./README.md");
-	console.log((await FNV1a.fromStream(1024, file.readable)).hashHexPadding());
+	await using file = await Deno.open("./README.md");
+	const instance = await new FNV1a(1024).updateFromStream(file.readable);
+	console.log(instance.hashHexPadding());
 });

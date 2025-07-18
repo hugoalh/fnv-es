@@ -1,4 +1,10 @@
-export type FNVBitsSize = 32 | 64 | 128 | 256 | 512 | 1024;
+export type FNVBitsSize =
+	| 32
+	| 64
+	| 128
+	| 256
+	| 512
+	| 1024;
 export interface FNVBitsParameter {
 	offset: bigint;
 	prime: bigint;
@@ -36,4 +42,8 @@ export function resolveFNVBitsParameter(size: FNVBitsSize): Readonly<FNVBitsPara
 	}
 	throw new RangeError(`\`${size}\` is not a valid FNV hash bits size! Only accept these values: ${Array.from(bitsData.keys()).join(", ")}`);
 }
-export type FNVAcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
+export type FNVAcceptDataType =
+	| string
+	| Uint8Array
+	| Uint16Array
+	| Uint32Array;

@@ -65,14 +65,12 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase16(): string;
     hashBase32Hex(): string;
     hashBase36(): string;
-    hashBase64(): string;
-    hashBase64URL(): string;
     hashBigInt(): bigint;
-    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
+    hashUint8Array(): Uint8Array;
     update(data: FNVAcceptDataType): this;
-    static fromStream(size: FNVBitsSize, stream: ReadableStream<FNVAcceptDataType>): Promise<FNV0>;
+    updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
   }
   ```
 - ```ts
@@ -85,14 +83,12 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase16(): string;
     hashBase32Hex(): string;
     hashBase36(): string;
-    hashBase64(): string;
-    hashBase64URL(): string;
     hashBigInt(): bigint;
-    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
+    hashUint8Array(): Uint8Array;
     update(data: FNVAcceptDataType): this;
-    static fromStream(size: FNVBitsSize, stream: ReadableStream<FNVAcceptDataType>): Promise<FNV1>;
+    updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
   }
   ```
 - ```ts
@@ -105,21 +101,29 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     hashBase16(): string;
     hashBase32Hex(): string;
     hashBase36(): string;
-    hashBase64(): string;
-    hashBase64URL(): string;
     hashBigInt(): bigint;
-    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
+    hashUint8Array(): Uint8Array;
     update(data: FNVAcceptDataType): this;
-    static fromStream(size: FNVBitsSize, stream: ReadableStream<FNVAcceptDataType>): Promise<FNV1a>;
+    updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
   }
   ```
 - ```ts
-  type FNVAcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
+  type FNVAcceptDataType =
+    | string
+    | Uint8Array
+    | Uint16Array
+    | Uint32Array;
   ```
 - ```ts
-  type FNVBitsSize = 32 | 64 | 128 | 256 | 512 | 1024;
+  type FNVBitsSize =
+    | 32
+    | 64
+    | 128
+    | 256
+    | 512
+    | 1024;
   ```
 
 > [!NOTE]
