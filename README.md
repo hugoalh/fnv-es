@@ -56,10 +56,11 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 ## 🧩 APIs
 
 - ```ts
-  class FNV0 {
-    constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
+  class FNV {
+    constructor(variant: FNVVariant, size: FNVBitsSize, data?: FNVAcceptDataType);
     get freezed(): boolean;
     get size(): FNVBitsSize;
+    get variant(): FNVVariant;
     freeze(): this;
     hash(): bigint;
     hashBase16(): string;
@@ -74,39 +75,18 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
   }
   ```
 - ```ts
-  class FNV1 {
+  class FNV0 extends FNV {
     constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
-    get freezed(): boolean;
-    get size(): FNVBitsSize;
-    freeze(): this;
-    hash(): bigint;
-    hashBase16(): string;
-    hashBase32Hex(): string;
-    hashBase36(): string;
-    hashBigInt(): bigint;
-    hashHex(): string;
-    hashHexPadding(): string;
-    hashUint8Array(): Uint8Array;
-    update(data: FNVAcceptDataType): this;
-    updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
   }
   ```
 - ```ts
-  class FNV1a {
+  class FNV1 extends FNV {
     constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
-    get freezed(): boolean;
-    get size(): FNVBitsSize;
-    freeze(): this;
-    hash(): bigint;
-    hashBase16(): string;
-    hashBase32Hex(): string;
-    hashBase36(): string;
-    hashBigInt(): bigint;
-    hashHex(): string;
-    hashHexPadding(): string;
-    hashUint8Array(): Uint8Array;
-    update(data: FNVAcceptDataType): this;
-    updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
+  }
+  ```
+- ```ts
+  class FNV1a extends FNV {
+    constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
   }
   ```
 - ```ts
@@ -124,6 +104,12 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     | 256
     | 512
     | 1024;
+  ```
+- ```ts
+  type FNVVariant =
+    | "0"
+    | "1"
+    | "1a";
   ```
 
 > [!NOTE]
