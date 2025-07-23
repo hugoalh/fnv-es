@@ -64,11 +64,8 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     freeze(): this;
     hash(): bigint;
     hashBase16(): string;
-    hashBase32Hex(): string;
-    hashBase36(): string;
     hashBigInt(): bigint;
     hashHex(): string;
-    hashHexPadding(): string;
     hashUint8Array(): Uint8Array;
     update(data: FNVAcceptDataType): this;
     updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
@@ -120,6 +117,6 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
 ## ✍️ Examples
 
 - ```ts
-  new FNV1(32, "hello").hashHexPadding();
+  new FNV1(32, "hello").hashHex();
   //=> "4F9F2CAB"
   ```

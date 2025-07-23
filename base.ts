@@ -59,8 +59,6 @@ export class FNV {
 	#freezed: boolean = false;
 	#hash: bigint = 0n;
 	#hashBase16: string | null = null;
-	#hashBase32Hex: string | null = null;
-	#hashBase36: string | null = null;
 	#hashUint8Array: Uint8Array | null = null;
 	#prime: bigint;
 	#size: FNVBitsSize;
@@ -98,8 +96,6 @@ export class FNV {
 			throw new Error(`Instance is freezed!`);
 		}
 		this.#hashBase16 = null;
-		this.#hashBase32Hex = null;
-		this.#hashBase36 = null;
 		this.#hashUint8Array = null;
 	}
 	/**
@@ -147,22 +143,6 @@ export class FNV {
 		return this.#hashBase16;
 	}
 	/**
-	 * Get the non-cryptographic hash of the data, in Base32Hex ({@link https://datatracker.ietf.org/doc/html/rfc4648#section-7 RFC 4648 §7}).
-	 * @returns {string}
-	 */
-	hashBase32Hex(): string {
-		this.#hashBase32Hex ??= this.hashBigInt().toString(32).toUpperCase();
-		return this.#hashBase32Hex;
-	}
-	/**
-	 * Get the non-cryptographic hash of the data, in Base36.
-	 * @returns {string}
-	 */
-	hashBase36(): string {
-		this.#hashBase36 ??= this.hashBigInt().toString(36).toUpperCase();
-		return this.#hashBase36;
-	}
-	/**
 	 * Get the non-cryptographic hash of the data, in big integer.
 	 * @returns {bigint}
 	 */
@@ -170,18 +150,11 @@ export class FNV {
 		return this.hash();
 	}
 	/**
-	 * Get the non-cryptographic hash of the data, in hex/hexadecimal without padding.
+	 * Get the non-cryptographic hash of the data, in hexadecimal with padding.
 	 * @returns {string}
 	 */
 	hashHex(): string {
-		return this.hashBase16();
-	}
-	/**
-	 * Get the non-cryptographic hash of the data, in hex/hexadecimal with padding.
-	 * @returns {string}
-	 */
-	hashHexPadding(): string {
-		return this.hashHex().padStart(this.#size / 4, "0");
+		return this.hashBase16().padStart(this.#size / 4, "0");
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in Uint8Array.
