@@ -17,6 +17,9 @@ await invokeDenoNodeJSTransformer({
 		description: "A module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).",
 		keywords: [
 			"fnv",
+			"fnv0",
+			"fnv1",
+			"fnv1a",
 			"fowler-noll-vo",
 			"hash"
 		],

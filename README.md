@@ -62,11 +62,8 @@ Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256,
     get size(): FNVBitsSize;
     get variant(): FNVVariant;
     freeze(): this;
-    hash(): bigint;
-    hashBase16(): string;
-    hashBigInt(): bigint;
+    hash(): Uint8Array;
     hashHex(): string;
-    hashUint8Array(): Uint8Array;
     update(data: FNVAcceptDataType): this;
     updateFromStream(stream: ReadableStream<FNVAcceptDataType>): Promise<this>;
   }
