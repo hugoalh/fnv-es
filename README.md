@@ -117,6 +117,6 @@ An ECMAScript (JavaScript & TypeScript) module to get the non-cryptographic hash
 ## ✍️ Examples
 
 - ```ts
-  new FNV1(32, "hello").hashHex();
+  new FNV1a(32, "hello").hashHex();
   //=> "4F9F2CAB"
   ```
