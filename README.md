@@ -8,7 +8,10 @@
 
 An ECMAScript (JavaScript & TypeScript) module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
 
-Currently supported variants of 0, 1, and 1a, and bits size of 32, 64, 128, 256, 512, and 1024.
+## 🌟 Features
+
+- Support bits size of 32, 64, 128, 256, 512, and 1024.
+- Support variants of 0, 1, and 1a.
 
 ## 🔰 Begin
 
