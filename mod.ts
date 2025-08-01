@@ -26,6 +26,7 @@ export {
 	FNV1a_1024
 } from "./1a.ts";
 export {
+	default,
 	FNV,
 	type FNVAcceptDataType,
 	type FNVBitsSize,

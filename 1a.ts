@@ -6,7 +6,7 @@ import {
 export type {
 	FNVAcceptDataType,
 	FNVBitsSize
-};
+} from "./base.ts";
 /**
  * Get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV) 1a.
  */
