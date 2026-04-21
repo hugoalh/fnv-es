@@ -2,9 +2,10 @@
 
 [**⚖️** MIT](./LICENSE.md)
 
-[![GitHub: hugoalh/fnv-es](https://img.shields.io/github/v/release/hugoalh/fnv-es?label=hugoalh/fnv-es&labelColor=181717&logo=github&logoColor=ffffff&sort=semver&style=flat "GitHub: hugoalh/fnv-es")](https://github.com/hugoalh/fnv-es)
-[![JSR: @hugoalh/fnv](https://img.shields.io/jsr/v/@hugoalh/fnv?label=@hugoalh/fnv&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/fnv")](https://jsr.io/@hugoalh/fnv)
-[![NPM: @hugoalh/fnv](https://img.shields.io/npm/v/@hugoalh/fnv?label=@hugoalh/fnv&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/fnv")](https://www.npmjs.com/package/@hugoalh/fnv)
+🔗
+[GitHub](https://github.com/hugoalh/fnv-es)
+[JSR](https://jsr.io/@hugoalh/fnv)
+[NPM](https://www.npmjs.com/package/@hugoalh/fnv)
 
 An ECMAScript module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
 
