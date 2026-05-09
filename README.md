@@ -4,8 +4,8 @@
 
 🔗
 [GitHub](https://github.com/hugoalh/fnv-es)
-[JSR](https://jsr.io/@hugoalh/fnv)
-[NPM](https://www.npmjs.com/package/@hugoalh/fnv)
+● [JSR](https://jsr.io/@hugoalh/fnv)
+● [NPM](https://www.npmjs.com/package/@hugoalh/fnv)
 
 An ECMAScript module to get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
 
