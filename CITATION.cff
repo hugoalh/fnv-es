@@ -8,11 +8,7 @@ authors:
 repository-code: "https://github.com/hugoalh/fnv-es"
 keywords:
   - "ecmascript"
-  - "ecmascript-module"
   - "es"
-  - "es-module"
-  - "esm"
-  - "esmodule"
   - "fnv"
   - "fnv0"
   - "fnv1"
