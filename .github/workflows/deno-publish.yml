@@ -57,7 +57,7 @@ jobs:
         with:
           ref: "${{inputs.commit || github.ref}}"
       - name: "Setup Deno"
-        uses: "denoland/setup-deno@v2"
+        uses: "denoland/setup-deno@v2.0.4"
         with:
           deno-version: "^2.7.12"
       - name: "Setup NodeJS"
