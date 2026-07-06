@@ -3,7 +3,8 @@
 [**⚖️** MIT](./LICENSE.md)
 
 🔗
-[GitHub](https://github.com/hugoalh/fnv-es)
+[DistBoard @hugoalh](https://hugoalh.github.io/distboard/fnv_ecmascript)
+● [GitHub](https://github.com/hugoalh/fnv-es)
 ● [JSR](https://jsr.io/@hugoalh/fnv)
 ● [NPM](https://www.npmjs.com/package/@hugoalh/fnv)
 
