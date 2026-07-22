@@ -138,10 +138,11 @@ export class FNV {
 	 */
 	hashHex(): string {
 		if (this.#hashHex === null) {
-			this.#hashHex = this.#bin.toString(16).toUpperCase().padStart(this.#size / 4, "0");
-			if (this.#hashHex.length !== this.#size / 4) {
-				throw new Error(`Unexpected hash hex result \`${this.#hashHex}\`! Please submit a bug report.`);
+			const result: string = this.#bin.toString(16).toUpperCase().padStart(this.#size / 4, "0");
+			if (result.length !== this.#size / 4) {
+				throw new Error(`Unexpected hash hex result \`${result}\`! Please submit a bug report.`);
 			}
+			this.#hashHex = result;
 		}
 		return this.#hashHex;
 	}
