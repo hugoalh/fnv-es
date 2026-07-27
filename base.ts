@@ -75,12 +75,12 @@ export class FNV {
 	 */
 	constructor(variant: FNVVariant, size: FNVBitsSize, data?: FNVAcceptDataType) {
 		if (!variants.includes(variant)) {
-			throw new RangeError(`\`${variant}\` is not a valid FNV variant! Only accept these values: ${variants.join(", ")}`);
+			throw new RangeError(`\`${variant}\` is not a valid FNV variant! Only accept these values: ${variants.join(", ")}.`);
 		}
 		this.#variant = variant;
 		const parameter: Readonly<FNVBitsParameters> | undefined = bitsParameters.get(size);
 		if (typeof parameter === "undefined") {
-			throw new RangeError(`\`${size}\` is not a valid FNV hash bits size! Only accept these values: ${Array.from(bitsParameters.keys()).join(", ")}`);
+			throw new RangeError(`\`${size}\` is not a valid FNV hash bits size! Only accept these values: ${Array.from(bitsParameters.keys()).join(", ")}.`);
 		}
 		const {
 			offset,
