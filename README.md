@@ -49,6 +49,7 @@ This does not request any runtime permission.
 | `./1` | `./1.ts` | Variant of 1. |
 | `./1a` | `./1a.ts` | Variant of 1a. |
 | `./base` | `./base.ts` | Base of FNV. |
+| `./cli` | `./cli.ts` | CLI. |
 
 > [!NOTE]
 > - Different runtimes have vary support for the sources and entrypoints, visit the runtime documentation for more information.
@@ -115,6 +116,28 @@ This does not request any runtime permission.
 > - For the full or prettier documentation, can visit via:
 >   - [Deno CLI `deno doc`](https://docs.deno.com/runtime/reference/cli/doc)
 >   - [JSR](https://jsr.io/@hugoalh/fnv)
+
+## 🧩 CLIs
+
+- ```powershell
+  fnv $Context [--size $Size] [--variant $Variant]
+  <# 🔀 Unordered Positions: `$Context`, `--size $Size`, `--variant $Variant` #>
+  ```
+- ```powershell
+  fnv --file $FilePath [--size $Size] [--variant $Variant]
+  <# 🔀 Unordered Positions: `--file`, `$FilePath`, `--size $Size`, `--variant $Variant` #>
+  ```
+- ```powershell
+  fnv --stdin [--size $Size] [--variant $Variant]
+  <# 🔀 Unordered Positions: `--stdin`, `--size $Size`, `--variant $Variant` #>
+  ```
+
+| **Argument** | **Type** | **Description** |
+|:--|:--|:--|
+| `file` | `switch` | Whether the resource is from file. |
+| `size` | `FNVBitsSize = 1024` | FNV bits size. |
+| `stdin` | `switch` | Whether the resource is from standard stream input. |
+| `variant` | `FNVVariant = "1a"` | FNV variant. |
 
 ## ✍️ Examples
 
