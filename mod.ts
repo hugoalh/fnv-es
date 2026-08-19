@@ -30,5 +30,6 @@ export {
 	FNV,
 	type FNVAcceptDataType,
 	type FNVBitsSize,
+	type FNVOptions,
 	type FNVVariant
 } from "./base.ts";

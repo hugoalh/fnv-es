@@ -65,7 +65,10 @@ const expectArgumentsLength: number = fromStdin ? 0 : 1;
 if (positionals.length !== expectArgumentsLength) {
 	throw new SyntaxError(`Invalid arguments length! Expect: ${expectArgumentsLength}, Current: ${positionals.length}.`);
 }
-const instance: FNV = new FNV(variant as FNVVariant, Number(size) as FNVBitsSize);
+const instance: FNV = new FNV({
+	size: Number(size) as FNVBitsSize,
+	variant: variant as FNVVariant
+});
 if (fromFile) {
 	await using file: FileHandle = await openFile(positionals[0], fsConstants.O_RDONLY);
 	await instance.updateFromStream(file.readableWebStream() as ReadableStream<Uint8Array>);

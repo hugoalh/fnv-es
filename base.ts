@@ -53,12 +53,24 @@ export type FNVAcceptDataType =
 	| Uint8Array
 	| Uint16Array
 	| Uint32Array;
+export interface FNVOptions {
+	/**
+	 * Bits size of the FNV.
+	 * @default {1024}
+	 */
+	size?: FNVBitsSize;
+	/**
+	 * Variant of the FNV.
+	 * @default {"1a"}
+	 */
+	variant?: FNVVariant;
+}
 /**
  * Get the non-cryptographic hash of the data with algorithm Fowler-Noll-Vo (FNV).
  */
 export class FNV {
 	get [Symbol.toStringTag](): string {
-		return `FNV-${this.#variant}-${this.#size}`;
+		return `FNV${this.#variant}-${this.#size}`;
 	}
 	#freezed: boolean = false;
 	#hashHex: string | null = null;
@@ -69,11 +81,13 @@ export class FNV {
 	#bin: bigint = 0n;
 	/**
 	 * Initialize.
-	 * @param {FNVVariant} variant Variant of the FNV.
-	 * @param {FNVBitsSize} size Bits size of the FNV.
-	 * @param {FNVAcceptDataType} [data] Data. Can append later via the method {@linkcode FNV.update} and {@linkcode FNV.updateFromStream}.
+	 * @param {FNVOptions} [options={}] Options.
 	 */
-	constructor(variant: FNVVariant, size: FNVBitsSize, data?: FNVAcceptDataType) {
+	constructor(options: FNVOptions = {}) {
+		const {
+			size = 1024,
+			variant = "1a"
+		}: FNVOptions = options;
 		if (!variants.includes(variant)) {
 			throw new RangeError(`\`${variant}\` is not a valid FNV variant! Only accept these values: ${variants.join(", ")}.`);
 		}
@@ -91,9 +105,6 @@ export class FNV {
 		}
 		this.#prime = prime;
 		this.#size = size;
-		if (typeof data !== "undefined") {
-			this.update(data);
-		}
 	}
 	/**
 	 * Whether the instance is freezed.

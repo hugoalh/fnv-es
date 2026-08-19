@@ -49,7 +49,7 @@ This does not request any runtime permission.
 
 - ```ts
   class FNV {
-    constructor(variant: FNVVariant, size: FNVBitsSize, data?: FNVAcceptDataType);
+    constructor(options?: FNVOptions);
     get freezed(): boolean;
     get size(): FNVBitsSize;
     get variant(): FNVVariant;
@@ -62,17 +62,23 @@ This does not request any runtime permission.
   ```
 - ```ts
   class FNV0 extends FNV {
-    constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
+    constructor(options?: Omit<FNVOptions, "variant">);
   }
   ```
 - ```ts
   class FNV1 extends FNV {
-    constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
+    constructor(options?: Omit<FNVOptions, "variant">);
   }
   ```
 - ```ts
   class FNV1a extends FNV {
-    constructor(size: FNVBitsSize, data?: FNVAcceptDataType);
+    constructor(options?: Omit<FNVOptions, "variant">);
+  }
+  ```
+- ```ts
+  interface FNVOptions {
+    size?: FNVBitsSize;
+    variant?: FNVVariant;
   }
   ```
 - ```ts
@@ -128,6 +134,6 @@ This does not request any runtime permission.
 ## ✍️ Examples
 
 - ```ts
-  new FNV1a(32, "hello").hashHex();
+  new FNV1a({ size: 32 }).update("hello").hashHex();
   //=> "4F9F2CAB"
   ```

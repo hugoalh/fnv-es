@@ -1,16 +1,14 @@
 import { deepStrictEqual } from "node:assert";
-import {
-	FNV0,
-	type FNVBitsSize
-} from "./0.ts";
+import { FNV0 } from "./0.ts";
+import type { FNVBitsSize } from "./base.ts";
 async function testerStream(t: Deno.TestContext, filePath: string): Promise<void> {
 	const sizes: readonly FNVBitsSize[] = [32, 64, 128, 256, 512, 1024];
 	for (const size of sizes) {
 		await t.step(`${size} Bits`, async () => {
 			const sampleText = await Deno.readTextFile(filePath);
-			const hashFromText = new FNV0(size, sampleText).hash();
+			const hashFromText = new FNV0({ size }).update(sampleText).hash();
 			await using sampleFile = await Deno.open(filePath);
-			const hashFromStream = (await new FNV0(size).updateFromStream(sampleFile.readable)).hash();
+			const hashFromStream = (await new FNV0({ size }).updateFromStream(sampleFile.readable)).hash();
 			deepStrictEqual(hashFromText, hashFromStream);
 		});
 	}
