@@ -29,14 +29,14 @@ This does not request any runtime permission.
 
 ## #️⃣ Entrypoints
 
-| **Name** | **Path** | **Description** |
-|:--|:--|:--|
-| `.` | `./mod.ts` | Default. |
-| `./0` | `./0.ts` | Variant of 0. |
-| `./1` | `./1.ts` | Variant of 1. |
-| `./1a` | `./1a.ts` | Variant of 1a. |
-| `./base` | `./base.ts` | Base of FNV. |
-| `./cli` | `./cli.ts` | CLI. |
+| **Type** | **Name** | **Path** | **Description** |
+|:--|:--|:--|:--|
+| API | `.` | `./mod.ts` | Default. |
+| API | `./0` | `./0.ts` | Variant of 0. |
+| API | `./1` | `./1.ts` | Variant of 1. |
+| API | `./1a` | `./1a.ts` | Variant of 1a. |
+| API | `./base` | `./base.ts` | Base of FNV. |
+| CLI | `./cli` | `./cli.ts` | Default. |
 
 > [!NOTE]
 > - Different runtimes have vary support for the entrypoints, visit the runtime documentation for more information.
@@ -113,15 +113,12 @@ This does not request any runtime permission.
 
 - ```powershell
   fnv $Context [--size $Size] [--variant $Variant]
-  <# 🔀 Unordered Positions: `$Context`, `--size $Size`, `--variant $Variant` #>
   ```
 - ```powershell
   fnv --file $FilePath [--size $Size] [--variant $Variant]
-  <# 🔀 Unordered Positions: `--file`, `$FilePath`, `--size $Size`, `--variant $Variant` #>
   ```
 - ```powershell
   fnv --stdin [--size $Size] [--variant $Variant]
-  <# 🔀 Unordered Positions: `--stdin`, `--size $Size`, `--variant $Variant` #>
   ```
 
 | **Argument** | **Type** | **Description** |
@@ -136,4 +133,7 @@ This does not request any runtime permission.
 - ```ts
   new FNV1a({ size: 32 }).update("hello").hashHex();
   //=> "4F9F2CAB"
+  ```
+- ```powershell
+  fnv 'hello' --size 32 --variant '1a'
   ```
