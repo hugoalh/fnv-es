@@ -79,15 +79,14 @@ Deno.test("Direct 10", { permissions: "none" }, () => {
 Deno.test("Direct 11", { permissions: "none" }, () => {
 	deepStrictEqual(new FNV1a({ size: 32 }).update("node.js").hashHex(), "B896180E");
 });
+const sizes: readonly FNVBitsSize[] = [32, 64, 128, 256, 512, 1024];
 async function testerStream(t: Deno.TestContext, filePath: string): Promise<void> {
-	const sizes: readonly FNVBitsSize[] = [32, 64, 128, 256, 512, 1024];
 	for (const size of sizes) {
 		await t.step(`${size} Bits`, async () => {
-			const sampleText = await Deno.readTextFile(filePath);
-			const hashFromText = new FNV1a({ size }).update(sampleText).hash();
+			const hashText = new FNV1a({ size }).update(await Deno.readFile(filePath)).hash();
 			await using sampleFile = await Deno.open(filePath);
-			const hashFromStream = (await new FNV1a({ size }).updateFromStream(sampleFile.readable)).hash();
-			deepStrictEqual(hashFromText, hashFromStream);
+			const hashStream = (await new FNV1a({ size }).updateFromStream(sampleFile.readable)).hash();
+			deepStrictEqual(hashText, hashStream);
 		});
 	}
 }
