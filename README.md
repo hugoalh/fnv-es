@@ -84,9 +84,7 @@ This does not request any runtime permission.
 - ```ts
   type FNVAcceptDataType =
     | string
-    | Uint8Array
-    | Uint16Array
-    | Uint32Array;
+    | Uint8Array;
   ```
 - ```ts
   type FNVBitsSize =

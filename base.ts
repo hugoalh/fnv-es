@@ -50,9 +50,7 @@ const bitsParameters: Map<FNVBitsSize, Readonly<FNVBitsParameters>> = new Map<FN
 ]);
 export type FNVAcceptDataType =
 	| string
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array;
+	| Uint8Array;
 export interface FNVOptions {
 	/**
 	 * Bits size of the FNV.
