@@ -72,7 +72,6 @@ export class FNV {
 	}
 	#freezed: boolean = false;
 	#hashHex: string | null = null;
-	#hashUint8Array: Uint8Array | null = null;
 	#prime: bigint;
 	#size: FNVBitsSize;
 	#variant: FNVVariant;
@@ -138,8 +137,7 @@ export class FNV {
 	 * @returns {Uint8Array}
 	 */
 	hash(): Uint8Array {
-		this.#hashUint8Array ??= Uint8Array.fromHex(this.hashHex());
-		return Uint8Array.from(this.#hashUint8Array);
+		return Uint8Array.fromHex(this.hashHex());
 	}
 	/**
 	 * Get the non-cryptographic hash of the data, in hexadecimal with padding.
@@ -153,7 +151,7 @@ export class FNV {
 			}
 			this.#hashHex = result;
 		}
-		return this.#hashHex;
+		return structuredClone(this.#hashHex);
 	}
 	/**
 	 * Append data.
@@ -165,12 +163,15 @@ export class FNV {
 			throw new Error(`Instance is freezed!`);
 		}
 		this.#hashHex = null;
-		this.#hashUint8Array = null;
-		const dataFmt: Uint8Array = (typeof data === "string") ? new TextEncoder().encode(data) : Uint8Array.from(data);
-		for (const byte of dataFmt) {
-			this.#bin = (this.#variant === "1a")
-				? BigInt.asUintN(this.#size, (this.#bin ^ BigInt(byte)) * this.#prime)
-				: BigInt.asUintN(this.#size, (this.#bin * this.#prime) ^ BigInt(byte));
+		const bytes: Uint8Array = (typeof data === "string") ? new TextEncoder().encode(data) : structuredClone(data);
+		if (this.#variant === "1a") {
+			for (const byte of bytes) {
+				this.#bin = BigInt.asUintN(this.#size, (this.#bin ^ BigInt(byte)) * this.#prime);
+			}
+		} else {
+			for (const byte of bytes) {
+				this.#bin = BigInt.asUintN(this.#size, (this.#bin * this.#prime) ^ BigInt(byte));
+			}
 		}
 		return this;
 	}
