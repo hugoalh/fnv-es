@@ -53,6 +53,7 @@ This does not request any runtime permission.
     get freezed(): boolean;
     get size(): FNVBitsSize;
     get variant(): FNVVariant;
+    clone(): FNV;
     freeze(): this;
     hash(): Uint8Array;
     hashHex(): string;

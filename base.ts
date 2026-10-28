@@ -125,6 +125,20 @@ export class FNV {
 		return this.#variant;
 	}
 	/**
+	 * Clone the instance.
+	 * @returns {FNV}
+	 */
+	clone(): FNV {
+		const instance: FNV = new FNV();
+		instance.#freezed = this.#freezed;
+		instance.#hashHex = this.#hashHex;
+		instance.#prime = this.#prime;
+		instance.#size = this.#size;
+		instance.#variant = this.#variant;
+		instance.#bin = this.#bin;
+		return instance;
+	}
+	/**
 	 * Freeze the instance to prevent any further update.
 	 * @returns {this}
 	 */
