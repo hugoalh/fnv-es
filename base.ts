@@ -165,7 +165,7 @@ export class FNV {
 			}
 			this.#hashHex = result;
 		}
-		return structuredClone(this.#hashHex);
+		return this.#hashHex;
 	}
 	/**
 	 * Append data.
